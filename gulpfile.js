@@ -196,7 +196,7 @@ exports.image = image;
 
 // Clean
 // exports.clean = clean;
-exports.hello = hello;
+// exports.hello = hello;
 
 
 /*
@@ -209,7 +209,7 @@ const build = gulp.parallel(style, script, image, markup, watch);
 /*
  * You can still use `gulp.task` to expose tasks
  */
-gulp.task('build', build);
+// gulp.task('build', build);
  
 /*
  * Define default task that can be called by just running `gulp` from cli
