@@ -38,13 +38,10 @@ var paths = {
         watch:'./src/assets/scripts/**/*.js',
     },
     images: {
-        // src: 'src/assets/src/images/**/*.+(png|jpg|gif|svg)',
+        src: 'src/assets/src/images/**/*.+(png|jpg|gif|svg)',
         // src: './src/assets/images/**/*.(png|jpg|gif|svg)', 
-        src: './src/assets/images/**/*.{jpg,jpeg,png,svg}', 
         dest: './dist/assets/images',
-        // watch:'./src/assets/images/**/*',
-        watch:'./src/assets/images//**/*.{jpg,jpeg,png,svg}',
-
+        watch:'./src/assets/images/**/*',
     },
     // Easily add additional paths
     markups: {
@@ -54,43 +51,13 @@ var paths = {
     }
 };
 
+// Limpieza del directorio dist
 
-// Greet
-function hello(cb) {
-    console.log('hello');
-    cb();
-  }
+gulp.task('clean', (done) => {
+    del([ paths.routes.dest ]);
+    done();
+});
 
-// Limpieza del directorios
-
-function clean() {      
-    return del([
-        // './vendor/',
-        paths.styles.dest,
-        // 'dist/report.csv',
-        // here we use a globbing pattern to match everything inside the `mobile` folder
-        // 'dist/mobile/**/*',
-        // we don't want to clean this file though so we negate the pattern
-        // '!dist/mobile/deploy.json'
-      ]);
-}
-
-
-// Configure Vendors tasks.
-// Bring third party dependencies from node_modules into vendor directory
-// function modules() {
-//     // Bootstrap
-//     var bootstrap = gulp.src('./node_modules/bootstrap/dist/**/*')
-//       .pipe(gulp.dest('./vendor/bootstrap'));
-//     // jQuery
-//     var jquery = gulp.src([
-//         './node_modules/jquery/dist/*',
-//         '!./node_modules/jquery/dist/core.js'
-//       ])
-//       .pipe(gulp.dest('./vendor/jquery'));
-//     return merge(bootstrap, jquery);
-// }
-  
 
 // Configure CSS tasks.
 function style() {
@@ -98,7 +65,7 @@ function style() {
         .src(paths.styles.src)
         // Initialize sourcemaps before compilation starts
         // .pipe(sourcemaps.init())
-        .pipe(sass()) // Converts Sass to CSS with gulp-sass
+        .pipe(sass())
         .on("error", sass.logError)
         // Use postcss with autoprefixer and compress the compiled file using cssnano
         // .pipe(prefix('last 2 versions'))
@@ -113,21 +80,31 @@ function style() {
         .pipe(browserSync.stream());
 }
 
+// Configure JS.
+// function script() {
+//     return gulp
+//         .src(paths.scripts.src)
+//         // Initialize sourcemaps before compilation starts
+//         .pipe(uglify())
+//         // minimize scripts
+//         .pipe(concat('bundle.js'))
+//         .pipe(rename({suffix: '.min'}))
+//         .pipe(gulp.dest(paths.scripts.dest))
+//         // Add browsersync stream pipe after compilation
+//         .pipe(browserSync.stream());
+// }
 
-
-  // Configure JS.
-function script() {
+gulp.task('script', function (cb) {
+    // consolo.log('Reading scripts ...');
     return gulp
         .src(paths.scripts.src)
-        // Initialize sourcemaps before compilation starts
-        .pipe(uglify())
-        // minimize scripts
         .pipe(concat('bundle.js'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest(paths.scripts.dest))
-        // Add browsersync stream pipe after compilation
-        .pipe(browserSync.stream());
-}
+        .pipe(gulp.dest(paths.scripts.dest));
+    (cb);
+});
+
+
+
 
 // Configure image stuff.
 function image() {
@@ -157,35 +134,43 @@ function reload(done) {
 }
 
 // Add browsersync initialization at the start of the watch task
-function watch() {
-    browserSync.init({
-        // You can tell browserSync to use this directory and serve it as a mini-server
-        server: {
-            baseDir: "./dist"
-        },
-        // If you are already serving your website locally using something like apache
-        // You can use the proxy setting to proxy that instead
-        // proxy: "yourlocal.dev"
-        // browser: "google chrome canary"
-    });
-    gulp.watch(paths.styles.watch, style);
-    gulp.watch(paths.scripts.watch, script);
-    gulp.watch(paths.images.watch, image);
+// function watch() {
+//     browserSync.init({
+//         // You can tell browserSync to use this directory and serve it as a mini-server
+//         server: {
+//             baseDir: "./dist"
+//         },
+//         // If you are already serving your website locally using something like apache
+//         // You can use the proxy setting to proxy that instead
+//         // proxy: "yourlocal.dev"
+//         // browser: "google chrome canary"
+//     });
+//     gulp.watch(paths.styles.watch, style);
+//     gulp.watch(paths.scripts.watch, script);
+//     gulp.watch(paths.images.watch, image);
 
-    // We should tell gulp which files to watch to trigger the reload
-    // This can be html or whatever you're using to develop your website
-    // Note -- you can obviously add the path to the Paths object
-    gulp.watch(paths.markups.watch, reload);
-}
+//     // We should tell gulp which files to watch to trigger the reload
+//     // This can be html or whatever you're using to develop your website
+//     // Note -- you can obviously add the path to the Paths object
+//     gulp.watch(paths.markups.watch, reload);
+// }
+
+gulp.task('watch', function (done) {
+    gulp.watch(paths.scripts.watch, script, function (){
+        consolo.log('Modifying js ...')
+    });
+    done();
+});
+
+
+
  
 // We don't have to expose the reload function
 // It's currently only useful in other functions
-exports.clean = clean;
-// exports.vendor = vendor;
+
 
 // Don't forget to expose the task!
 exports.watch = watch
-// exports.build = build;
 // Expose the task by exporting it
 // This allows you to run it from the commandline using
 // $ gulp style
@@ -196,15 +181,13 @@ exports.image = image;
 
 // Clean
 // exports.clean = clean;
-exports.hello = hello;
 
 
 /*
  * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
  */
-const build = gulp.parallel(style, script, image, markup, watch);
-// const vendor = gulp.series(clean, modules);
-// const watch = gulp.series(build, gulp.parallel(watch, browserSync));
+var build = gulp.parallel(style, script, image, markup, watch);
+// var clean = gulp.parallel(style, script, image, markup);
 
 /*
  * You can still use `gulp.task` to expose tasks
