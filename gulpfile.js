@@ -49,7 +49,19 @@ var paths = {
 
 // Limpieza del directorio dist
 
-  
+// function clean() {      
+//     return del([
+//         paths.styles.dest,
+//         // 'dist/report.csv',
+//         // here we use a globbing pattern to match everything inside the `mobile` folder
+//         // 'dist/mobile/**/*',
+//         // we don't want to clean this file though so we negate the pattern
+//         // '!dist/mobile/deploy.json'
+//       ]);
+// }
+
+
+
 // Configure CSS tasks.
 function style() {
     return gulp
@@ -137,7 +149,7 @@ function watch() {
 // We don't have to expose the reload function
 // It's currently only useful in other functions
 
-    
+
 // Don't forget to expose the task!
 exports.watch = watch
 // Expose the task by exporting it
@@ -148,11 +160,16 @@ exports.script = script;
 exports.markup = markup;
 exports.image = image;
 
+// Clean
+// exports.clean = clean;
+
+
 /*
  * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
  */
 var build = gulp.parallel(style, script, image, markup, watch);
- 
+// var clean = gulp.parallel(style, script, image, markup);
+
 /*
  * You can still use `gulp.task` to expose tasks
  */
