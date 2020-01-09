@@ -1,0 +1,22 @@
+/*------------------------------------*\
+    #COLOR
+\*------------------------------------*/
+
+/**
+ * o-object-name[element|modifier]
+ *
+ * o-color-red
+ * o-layut__col
+ * o-container--fixed
+ *
+ */
+
+
+ .o-text-align{
+    &-primary{
+        color: $color-primary;
+    }
+    &-secundary{
+        color: $color-secundary;
+    }           
+}

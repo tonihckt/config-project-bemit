@@ -1,0 +1,27 @@
+/*------------------------------------*\
+    #UTILITIES
+\*------------------------------------*/
+
+/**
+ * u-utility-name
+ *
+ * u-full-with
+ * u-block
+ *
+ */
+
+ .u-none{
+     display: none;
+
+    // breakpoints no recomendable
+    // (html).c_form_field@md
+    //  &\@md{
+    //      @include md{
+    //          display: none;
+    //      }
+    //  }
+ }
+
+ .u-uppercase{
+     text-transform: uppercase;
+ }

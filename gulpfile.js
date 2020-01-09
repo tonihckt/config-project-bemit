@@ -20,11 +20,13 @@ const browserSync = require("browser-sync").create();
 
 var paths = {
     styles: {
-        // By using styles/**/*.sass - styles/**/*.scss we're telling gulp to check all folders for any sass file
-        src: './src/assets/styles/**/*.{sass,scss}',
+        // By using styles/**/*.sass - styles/**/*.scss we're telling gulp to check all folders for any sass file 
+        // src: './src/assets/styles/**/*.{sass,scss}',
+
+        src: './src/assets/styles/**/*.scss',
         // Compiled files will end up in whichever folder it's found in (partials are not compiled)
         dest: './dist/assets/styles',
-        watch:'./src/assets/styles/**/*.{sass,scss}',
+        watch:'./src/assets/styles/**/*.scss',
     },
     scripts: {
         src: './src/assets/scripts/*.js',

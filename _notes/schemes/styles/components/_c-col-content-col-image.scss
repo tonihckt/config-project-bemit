@@ -1,0 +1,13 @@
+.c-col-content-col-image{
+    &__container{}
+
+    &__col{
+        &--content{}
+        &--image{}
+    }
+    &__wrapper-caption{}
+    &__wrapper-title{}
+    &__wrapper-content{}
+    &__wrapper-button{}
+
+}

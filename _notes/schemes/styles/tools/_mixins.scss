@@ -1,0 +1,45 @@
+/*------------------------------------*\
+    #MIXINS
+\*------------------------------------*/
+
+/**
+ *
+ */
+
+ @mixin sm {
+     @media (max-width:501px){
+         @content
+     }
+
+ };
+
+ @mixin md {
+    @media (max-width:1101px){
+        @content
+    }
+
+};
+
+
+@mixin only-xs {
+    @media (min-width:0px) and (max-height:500px){
+        @content
+    }
+
+};
+
+@mixin only-sm {
+    @media (min-width:501px) and (max-height:1100px){
+        @content
+    }
+
+};
+
+@mixin only-md {
+    @media (min-width:1101px){
+        @content
+    }
+
+};
+
+

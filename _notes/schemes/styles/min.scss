@@ -1,0 +1,51 @@
+/*------------------------------------*\
+    #MAIN
+\*------------------------------------*/
+
+/**
+ *
+ */
+
+// SETTINGS
+@import './settings/settings';
+
+// TOOLS - ( FUNCTIONS - MIXINS)
+@import './tools/functions';
+@import './tools/mixins';
+
+// GENERICS 
+@import './generic/generic';
+
+// TAGS 
+@import './tags-elements/tags';
+
+// KEYFRAMES
+@import './keyframes/keyframes';
+
+// OBJECTS
+@import './objects/o-container';
+@import './objects/o-color';
+@import './objects/o-text-align'; // NEW OBJECT
+
+
+// COMPONENTS
+@import './components/c-footer';
+@import './components/header/c-header';
+@import './components/header/c-menu-dropdown';
+@import './components/c-title-and-content';
+@import './components/c-col-content-col-image';
+@import './components/c-image';
+@import './components/c-image-change-size';
+@import './components/c-form';
+@import './components/c-tabs';
+
+// UTILITIES
+// @import './scopes/scopes'; // procurar no utilizarlas
+
+// UTILITIES
+@import './utilities-trumps/utilities';
+
+
+// EXTRAS LOAD PAGE
+// .c-loader{display:none} // estado or defecto:oculto
+// .is-loading .c-loader{display:block} // minetras carga la pagina

@@ -1,0 +1,28 @@
+/*------------------------------------*\
+    #TEXT ALIGN 
+\*------------------------------------*/
+
+/**
+ * o-object-name[element|modifier]
+ *
+ * o-color-red
+ * o-layut__col
+ * o-container--fixed
+ *
+ */
+
+ 
+.o-text-align{
+    &-center{
+        text-align: center;
+    }
+    &-center{
+        text-align: left;
+    }
+    &-center{
+        text-align: right;
+    }
+    &-center{
+        text-align: justify;
+    }            
+}
