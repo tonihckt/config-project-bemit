@@ -20,8 +20,8 @@ const browserSync = require("browser-sync").create();
 
 var paths = {
     routes: {
-        src: './src/',
-        dest: './dist/',
+        src: './src',
+        dest: './dist',
     },
     styles: {
         // By using styles/**/*.sass - styles/**/*.scss we're telling gulp to check all folders for any sass file 
