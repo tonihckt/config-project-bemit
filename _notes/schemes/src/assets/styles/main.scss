@@ -49,3 +49,21 @@
 // EXTRAS LOAD PAGE
 // .c-loader{display:none} // estado or defecto:oculto
 // .is-loading .c-loader{display:block} // minetras carga la pagina
+
+$primary-color:#6c63ff;
+$font: 'lato';
+
+body {
+    background: $primary-color;
+    font-family: $font;
+
+    .container {
+        width: 1240px;
+        margin: auto;
+    }
+
+    p {
+        color: #ffffff;
+        transform: translate(50px, 50%)
+    }
+}
